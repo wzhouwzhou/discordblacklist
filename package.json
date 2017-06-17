@@ -1,0 +1,27 @@
+{
+  "name": "discordblacklist",
+  "version": "1.0.0",
+  "description": "A nodejs package that facilitates getting banned Discord users from DiscordBans",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wzhouwzhou/discordblacklist.git"
+  },
+  "keywords": [
+    "Discord",
+    "Bans"
+  ],
+  "author": "WillyZ",
+  "license": "AGPL-3.0",
+  "readme": "README.md",
+  "bugs": {
+    "url": "https://github.com/wzhouwzhou/discordblacklist/issues"
+  },
+  "homepage": "https://github.com/wzhouwzhou/discordblacklist#readme",
+  "dependencies": {
+    "needle": "^1.6.0"
+  }
+}
