@@ -1,3 +1,6 @@
+![Image](http://i.imgur.com/12c5HpD.png)
+
+--Text Version--
 # discordblacklist
 ## A nodejs package that facilitates getting banned Discord users from DiscordBans
 
@@ -9,9 +12,12 @@
 
     const Blacklist = require('discordblacklist'),
     banlist = new Blacklist('token');
-Get a token [here](https://bans.discordlist.net/mytoken)
+Get a token [here](https://bans.discordlist.net/mytoken).
 <br></br>
-**To update the ban list:**
+The object will try to update its banlist on creation, however you can update the list manually at any time.
+
+<br></br>
+**To update the ban list manually:**
 ```banlist.update();```
 
 This returns promise, and you can get the ban list from it with either the thenable or `banlist.list`.
@@ -39,3 +45,18 @@ To clear the autoupdater simply call ``banlist.stopUpdateTimer();``. To then set
 If for whatever reason you would like to switch tokens mid-execution, you can do that easily by calling
 ```banlist.changeToken('newtoken');```
 <br></br>
+
+### Summary example:
+
+    //Create the object (which autorefreshes the banlist every 120 minutes)
+    const Blacklist = require('discordblacklist');
+    let banlist = new Blacklist('token', true, 120);
+
+    //Someone's id to test
+    const someID = '1234567890';
+
+    //Check if they are on the banlist
+    let isOnTheBanList = banlist.lookup(someID);
+
+    //Get the full list
+    console.log(banlist.list);
