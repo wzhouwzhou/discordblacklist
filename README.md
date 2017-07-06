@@ -18,7 +18,7 @@ The object will try to update its banlist on creation, however you can update th
 **To update the ban list manually:**
 ```banlist.update();```
 
-This returns promise, and you can get the ban list from it with either the thenable or `banlist.list` or `banlist.array()`.
+This returns promise, and you can get the ban list from it with either the thenable or `banlist.list` or the thenable of `banlist.array()`.
 <br></br>
 **It is recommended you update your ban list every two hours**
 <br></br>
@@ -60,4 +60,4 @@ If for whatever reason you would like to switch tokens mid-execution, you can do
     console.log(banlist.list);
 
     //Get the full list as an array
-    console.log(banlist.array());
+    console.log(await banlist.array());
