@@ -1,6 +1,6 @@
 {
   "name": "discordblacklist",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A nodejs package that facilitates getting banned Discord users from DiscordBans",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "url": "https://github.com/wzhouwzhou/discordblacklist/issues"
   },
   "homepage": "https://github.com/wzhouwzhou/discordblacklist#readme",
+  "github": "https://github.com/wzhouwzhou/discordblacklist",
   "dependencies": {
     "needle": "^1.6.0"
   }

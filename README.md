@@ -1,6 +1,4 @@
-![Image](http://i.imgur.com/12c5HpD.png)
 
---Text Version--
 # discordblacklist
 ## A nodejs package that facilitates getting banned Discord users from DiscordBans
 
@@ -20,7 +18,7 @@ The object will try to update its banlist on creation, however you can update th
 **To update the ban list manually:**
 ```banlist.update();```
 
-This returns promise, and you can get the ban list from it with either the thenable or `banlist.list`.
+This returns promise, and you can get the ban list from it with either the thenable or `banlist.list` or `banlist.array()`.
 <br></br>
 **It is recommended you update your ban list every two hours**
 <br></br>
@@ -58,5 +56,8 @@ If for whatever reason you would like to switch tokens mid-execution, you can do
     //Check if they are on the banlist
     let isOnTheBanList = banlist.lookup(someID);
 
-    //Get the full list
+    //Get the full list in string form
     console.log(banlist.list);
+
+    //Get the full list as an array
+    console.log(banlist.array());
