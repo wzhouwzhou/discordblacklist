@@ -18,7 +18,7 @@ The object will try to update its banlist on creation, however you can update th
 **To update the ban list manually:**
 ```banlist.update();```
 
-This returns promise, and you can get the ban list from it with either the thenable or `banlist.list` or the thenable of `banlist.array()`.
+This returns a promise, and you can get the ban list from it with either the thenable or `banlist.list` or the thenable of `banlist.array()`.
 <br></br>
 **It is recommended you update your ban list every two hours**
 <br></br>
@@ -53,11 +53,14 @@ If for whatever reason you would like to switch tokens mid-execution, you can do
     //Someone's id to test
     const someID = '1234567890';
 
-    //Check if they are on the banlist
+    //Check if they are on the banlist - Returns a true/false , or throws an error if an error occurred.
     let isOnTheBanList = banlist.lookup(someID);
 
-    //Get the full list in string form
+    //Get the full list in string form. Must be used after update() has completed
     console.log(banlist.list);
 
-    //Get the full list as an array
+    //Promise resolves the full list as an array. Can be called before update() is completed. Await will throw an error if an error occurred.
     console.log(await banlist.array());
+
+    //Manually update the ban list:
+    let theUpdatedList = await banlist.update();
