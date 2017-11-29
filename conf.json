@@ -8,7 +8,8 @@
         "excludePattern": "((^|\\/|\\\\)_)|(\\.json$)",
         "exclude": [
             "node_modules",
-            "docs"
+            "docs",
+            "examples"
         ]
     },
     "templates": {
