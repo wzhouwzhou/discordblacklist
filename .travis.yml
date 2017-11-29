@@ -4,4 +4,5 @@ node_js:
 cache:
   directories:
     - node_modules
+before_install: sudo npm install -g eslint
 install: npm install
