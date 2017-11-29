@@ -70,7 +70,6 @@ To get the list quickly without updating unless the internal cache was deleted b
 list and newList will contain a <BanStore> object which is a collection of BannedUser objects mapped by their banID. BannedUser objects have an id (userid), tag (discord tag), banID, bannedFor (reason), prooflink.
 To strip any class data and just get them in pure object form just run <BannedUser>.serialize() or <BanStore>.serialize(), and to stringify them <BannedUser> or <BanStore>.stringify().
 
-<br></br>
 **It is recommended you update your ban list every two hours**
 
 You can have the blacklist autoupdate at the recommended time like so:
@@ -91,14 +90,17 @@ to be completely explicit:
       }
     });
 
+**Looking up users.**
+
+Convenience shortcut (only works after if banlist has been fetched and cached):
+
+    blacklist.lookup('id');
+
+'id' is the userid of the user you want to check. This returns either a BannedUser or null depending on if the user is on the ban list.
+
 **Clearing and resetting your auto-updater**
 
 To clear the autoupdater simply call ``banlist.stopUpdateTimer();``. To then set a new one do ``banlist.setUpdateTimer(minutes)`` where minutes is an number.
-
-**Looking up users.**
-
-Convenience shortcut (only works if banlist has been fetched and cached):
-```blacklist.lookup('id')``` where id is the userid of the user you want to check. This returns a boolean depending on if the user is on the ban list.
 
 **Changing token**
 
@@ -111,8 +113,8 @@ This work is ©Copyright under the `GNU AFFERO GENERAL PUBLIC LICENSE Version 3`
 ### Further Documentation:
 [https://wzhouwzhou.github.io/discordblacklist/](https://wzhouwzhou.github.io/discordblacklist/)
 
-Enjoy this package? Consider checking out some of my other work:
+Enjoy this package? Consider starring on [github](https://github.com/wzhouwzhou/discordblacklist) and checking out some of my other work:
 
-[ytsearcher](https://npmjs.com/ytsearcher)
+[Youtube Search API](https://npmjs.com/ytsearcher)
 
 [Chips Discord Bot](https://chipsbot.me/)
