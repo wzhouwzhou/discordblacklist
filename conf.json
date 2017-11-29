@@ -1,0 +1,21 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "plugins": ["node_modules/jsdoc-strip-async-await"],
+    "source": {
+        "includePattern": ".+\\.(js(doc)?)|(discord)$",
+        "excludePattern": "((^|\\/|\\\\)_)|(\\.json$)",
+        "exclude": [
+            "node_modules",
+            "docs"
+        ]
+    },
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": true,
+        "default": {
+            "outputSourceFiles": true
+        }
+    }
+}
