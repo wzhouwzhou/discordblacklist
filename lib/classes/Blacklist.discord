@@ -34,7 +34,6 @@ const Blacklist = class Blacklist {
    *
    * If object (as documented), it must contain a 'token' key and an optional update settings string or object
    *
-   * @memberof Blacklist
    * @property {number}  minutes     - The interval time in minutes to autoupdate the Blacklist.
    * @property {boolean} autoupdate  - Must be true to enable the autoupdate.
    * @typedef {(boolean|string|number|Object)} UpdateOptions
@@ -45,7 +44,6 @@ const Blacklist = class Blacklist {
    *
    * If object (as documented), it must contain a 'token' key and an optional update settings string or object
    *
-   * @memberof Blacklist
    * @property {TokenOptions}  token   - The token of the Blacklist.
    * @property {UpdateOptions} update  - The options for Blacklist auto-updating.
    * @typedef {(string|Object)} BlacklistOptions

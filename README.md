@@ -1,3 +1,16 @@
+<div align="center">
+    <br />
+    <p>
+        <a href="https://www.npmjs.com/package/discordblacklist"><img src="https://img.shields.io/npm/v/discordblacklist.svg" alt="NPM version" /></a>
+        <a href="https://www.npmjs.com/package/discordblacklist"><img src="https://img.shields.io/npm/dt/discordblacklist.svg" alt="NPM downloads" /></a>
+        <a href="https://travis-ci.org/wzhouwzhou/discordblacklist"><img src="https://travis-ci.org/wzhouwzhou/discordblacklist.svg" alt="Build Status" /></a>
+        <a href="https://david-dm.org/wzhouwzhou/discordblacklist"><img src="https://img.shields.io/david/wzhouwzhou/discordblacklist.svg" alt="Dependencies" /></a>
+        <a href="https://paypal.me/wzhouwzhou"><img src="https://img.shields.io/badge/donate-paypal-009cde.svg" alt="Paypal" /></a>
+    </p>
+    <p>
+        <a href="https://nodei.co/npm/discordblacklist/"><img src="https://nodei.co/npm/discordblacklist.png?stars=true&downloads=true"></a>
+    </p>
+</div>
 
 # Discordblacklist
 ## The Featured Nodejs package that facilitates getting banned Discord users from DiscordBans.

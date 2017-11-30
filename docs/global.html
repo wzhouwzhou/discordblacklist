@@ -94,167 +94,6 @@
     
 
     
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="equals"><span class="type-signature"></span>equals<span class="signature">(other)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Compares the serializable values of Bannedusers.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>other</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="BannedUser.html">BannedUser</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The other BannedUser</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_classes_BannedUser.js.html">lib/classes/BannedUser.js</a>, <a href="lib_classes_BannedUser.js.html#line120">line 120</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    True if other user contains the same data.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">boolean</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-    
 
     
         <h3 class="subsection-title">Type Definitions</h3>
@@ -486,6 +325,158 @@ the BannedUser is on the Banlist. May sometimes contain a DiscordBans redirect l
 
             
                 
+<h4 class="name" id="BlacklistOptions">BlacklistOptions</h4>
+
+
+
+
+<div class="description">
+    If string, it must contain the token of the Blacklist.
+
+If object (as documented), it must contain a 'token' key and an optional update settings string or object
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#TokenOptions">TokenOptions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The token of the Blacklist.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>update</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#UpdateOptions">UpdateOptions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The options for Blacklist auto-updating.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_classes_Blacklist.discord.html">lib/classes/Blacklist.discord</a>, <a href="lib_classes_Blacklist.discord.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
 <h4 class="name" id="TokenOptions">TokenOptions</h4>
 
 
@@ -700,6 +691,164 @@ If set to true, calling <Blacklist>.changeToken</td>
 
 
             
+                
+<h4 class="name" id="UpdateOptions">UpdateOptions</h4>
+
+
+
+
+<div class="description">
+    If string, it must contain "true" or Constants.TIMERS_DEFAULT which is exported from the discordblacklist module.
+
+If object (as documented), it must contain a 'token' key and an optional update settings string or object
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">boolean</span>
+|
+
+<span class="param-type">string</span>
+|
+
+<span class="param-type">number</span>
+|
+
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>minutes</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The interval time in minutes to autoupdate the Blacklist.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>autoupdate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Must be true to enable the autoupdate.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_classes_Blacklist.discord.html">lib/classes/Blacklist.discord</a>, <a href="lib_classes_Blacklist.discord.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
     
 
     
@@ -713,13 +862,13 @@ If set to true, calling <Blacklist>.changeToken</td>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Constants.html">Constants</a></li><li><a href="module-discordblacklist.html">discordblacklist</a></li><li><a href="module-ErrorEnum.html">ErrorEnum</a></li></ul><h3>Classes</h3><ul><li><a href="BannedUser.html">BannedUser</a></li><li><a href="BanStore.html">BanStore</a></li><li><a href="Blacklist.html">Blacklist</a></li><li><a href="ConnectionError.html">ConnectionError</a></li><li><a href="TimerError.html">TimerError</a></li><li><a href="TokenError.html">TokenError</a></li></ul><h3>Global</h3><ul><li><a href="global.html#equals">equals</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Constants.html">Constants</a></li><li><a href="module-discordblacklist.html">discordblacklist</a></li><li><a href="module-ErrorEnum.html">ErrorEnum</a></li></ul><h3>Classes</h3><ul><li><a href="BannedUser.html">BannedUser</a></li><li><a href="BanStore.html">BanStore</a></li><li><a href="Blacklist.html">Blacklist</a></li><li><a href="ConnectionError.html">ConnectionError</a></li><li><a href="TimerError.html">TimerError</a></li><li><a href="TokenError.html">TokenError</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0</a> on Wed Nov 29 2017 20:14:41 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0</a> on Wed Nov 29 2017 20:44:51 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>
