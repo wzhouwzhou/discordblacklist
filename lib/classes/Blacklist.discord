@@ -1,0 +1,291 @@
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+
+const { isValidTimer } = require('../functions/isValidTimer');
+const { TokenError, TimerError, ConnectionError } = require('../deps/ErrorEnum');
+const { RequestHandler } = require('./RequestHandler');
+const { TIMERS_DEFAULT, TIMERS_DEFAULT_MINUTES } = require('../deps/Constants');
+const { BanStore } = require('./BanStore');
+const { BannedUser } = require('./BannedUser');
+
+const _reqHandler = Symbol('_reqHandler');
+
+/**
+ * Class Blacklist
+ * This is the centralised class to interact with the Discord Bans API
+ *
+ * @type {Blacklist}
+ */
+const Blacklist = class Blacklist {
+  /**
+   * Sets the token options for this RequestHandler.
+   * Contains a 'token' key and settings for key protection.
+   *
+   * @property {string}  token          - The API token to use.
+   * @property {boolean} [protect=true] - Whether to prevent access to the token.
+   * If set to false, token is retrievable in <RequestHandler>.token and <Blacklist>.token
+   * @property {boolean} [auth=false]   - Whether to require authentication when trying to set a new token.
+   * If set to true, calling <Blacklist>.changeToken
+   * @typedef {Object} TokenOptions
+   */
+
+  /**
+   * If string, it must contain "true" or Constants.TIMERS_DEFAULT which is exported from the discordblacklist module.
+   *
+   * If object (as documented), it must contain a 'token' key and an optional update settings string or object
+   *
+   * @property {number}  minutes     - The interval time in minutes to autoupdate the Blacklist.
+   * @property {boolean} autoupdate  - Must be true to enable the autoupdate.
+   * @typedef {(boolean|string|number|Object)} UpdateOptions
+   */
+
+  /**
+   * If string, it must contain the token of the Blacklist.
+   *
+   * If object (as documented), it must contain a 'token' key and an optional update settings string or object
+   *
+   * @property {TokenOptions}  token   - The token of the Blacklist.
+   * @property {UpdateOptions} update  - The options for Blacklist auto-updating.
+   * @typedef {(string|Object)} BlacklistOptions
+   */
+
+  /**
+   * Constructs a Blacklist. You must give the blacklist a token in the form of string or an object with a 'token' key.
+   *
+   * @constructor
+   * @param  {BlacklistOptions} opts  - The options for this Blacklist.
+   */
+
+  constructor(opts) {
+    let token, update;
+    if (typeof opts === 'string') {
+      token = opts;
+    } else if (typeof opts === 'object' && 'token' in opts) {
+      token = opts.token;
+      if ('update' in opts) update = opts.update;
+    } else {
+      throw new TokenError('No token');
+    }
+
+    this._setupRHandler(token);
+    this._setupTimer(update);
+  }
+
+  /**
+   * Fetches an updated BanStore, caching it into Blacklist.banstore by default.
+   *
+   * @instance
+   * @memberof Blacklist
+   * @method update
+   * @param  {boolean} [cache=true] - Whether to cache the new banstore into <Blacklist>.banstore
+   * @return {Promise.<Banstore>}   Promise that resolves to an updated BanStore
+   */
+
+  update(cache = true) {
+    return new Promise(async (res, rej) => {
+      try {
+        const results = await this[_reqHandler]._fetch();
+        const list = results.lobj;
+        if (!list) throw new ConnectionError('No data received');
+
+        const banstore = new BanStore(list.map(u => new BannedUser(u)));
+
+        if (cache) this.banstore = banstore;
+        return res(banstore);
+      } catch (err) {
+        return rej(err);
+      }
+    });
+  }
+
+  /**
+   * If a banstore has been previously cached resolves immediately
+   *
+   * @instance
+   * @memberof Blacklist
+   * @method fetchBanlist
+   * @return {Promise.<Banstore>} A previously cached or new BanStore
+   */
+
+  fetchBanlist() {
+    return new Promise((res, rej) => {
+      if (this.banstore) return res(this.banstore);
+      else return this.update.then(res).catch(rej);
+    });
+  }
+
+  /**
+   * Convenience function to check if a user is on the banlist.
+   *
+   * @instance
+   * @memberof Blacklist
+   * @method lookup
+   * @param {(string|Function)} id   - The ID of a banned user to lookup, or a BannedUserCallback callback function.
+   * @param {boolean} possibleupdate - If set to true, will return a Promise that either resolves
+   * to a BannedUser or null.
+   * If a BannedUser isn't immediately found, an attempt to fetch an updated banstore will be made.
+   * If set to false, will return a BannedUser or null.
+   * @return {((BannedUser|null)|(Promise.<(BannedUser|null)>))}  Depending on possibleupdate,
+   * either a BannedUser or null, or a Promise that resolves to one of those.
+   */
+
+  lookup(id, possibleupdate = false) {
+    if (!id) throw new Error('No id specified to lookup');
+    if (!possibleupdate) {
+      if (!this.banstore) throw new Error('Banlist is not cached, has banlist.update() resolved yet?');
+      return this.banstore.lookup(id);
+    }
+
+    return new Promise(async (res, rej) => {
+      try {
+        let maybe = this.banstore.lookup(id);
+        if (!maybe) await this.update();
+        return res(this.lookup(id) || null);
+      } catch (err) {
+        return rej(err);
+      }
+    });
+  }
+
+  /**
+   * Sets a new update timer given minutes.
+   *
+   * @instance
+   * @memberof Blacklist
+   * @method setUpdateTimer
+   * @param  {numbers}       mins - The minutes to set a new timer.
+   * @return {Blacklist} The blacklist object.
+   */
+
+  setUpdateTimer(mins) {
+    if (!isValidTimer(mins)) throw new TimerError(`Invalid minutes specified of ${mins}`);
+    this._setupTimer(mins);
+    return this;
+  }
+
+  /**
+   * Forcibly stops an autoupdate timer.
+   *
+   * @instance
+   * @memberof Blacklist
+   * @method setUpdateTimer
+   * @return {Blacklist} The blacklist object.
+   */
+
+  stopUpdateTimer() {
+    this._setupTimer(false);
+    return this;
+  }
+
+  /**
+   * Sets a new token for this Blacklist's RequestHandler
+   *
+   * @instance
+   * @memberof Blacklist
+   * @method changeToken
+   * @param  {string}    n - The new token
+   * @param  {string}    o - The old token if auth is enabled.
+   * @return {boolean} True if token has been updated.
+   */
+
+  changeToken(n, o) {
+    return this[_reqHandler].setToken(n, o);
+  }
+
+  /**
+   * Alias for changeToken.
+   *
+   * @instance
+   * @memberof Blacklist
+   * @method setToken
+   * @param  {string}    n - The new token
+   * @param  {string}    o - The old token if auth is enabled.
+   * @return {boolean} True if token has been updated.
+   */
+
+  setToken(...args) {
+    return this.changeToken(...args);
+  }
+
+  /**
+   * Gets current token if key protection is off.
+   *
+   * @instance
+   * @memberof Blacklist
+   * @method token
+   * @return {(string|undefined)} The token or undefined.
+   */
+
+  get token() {
+    return this[_reqHandler].token;
+  }
+
+  /**
+   * Sets up the RequestHandler of this Blacklist.
+   *
+   * @instance
+   * @memberof Blacklist
+   * @protected
+   * @method _setupRHandler
+   * @param {TokenOptions} token - The token options to use.
+   */
+
+  _setupRHandler(token) {
+    let realtoken, protect, auth;
+    if (typeof token === 'string') {
+      realtoken = token;
+    } else if (typeof token === 'object') {
+      if (!('token' in token)) throw new TokenError('No token');
+      if (typeof token.token !== 'string') throw new TokenError('Token in token options object must be a string');
+      realtoken = token.token;
+      protect = 'protect' in token ? token.protect : true;
+      auth = 'auth' in token ? token.auth : false;
+    }
+
+    Object.defineProperty(this, _reqHandler, {
+      value: new RequestHandler(this, {
+        token: realtoken, protect, auth,
+      }),
+    });
+  }
+
+  /**
+   * Convenience function to check if a user is on the banlist.
+   *
+   * @instance
+   * @memberof Blacklist
+   * @protected
+   * @method _setupTimer
+   * @property {UpdateOptions} update  - The options for Blacklist auto-updating.
+   * @return {((BannedUser|null)|(Promise.<(BannedUser|null)>))}  Depending on possibleupdate,
+   * either a BannedUser or null, or a Promise that resolves to one of those.
+   */
+
+  _setupTimer(update = false) {
+    this.autoupdate = false;
+    this.minutes = -1;
+    if (this.autoupdateTimer) clearInterval(this.autoupdateTimer);
+    this.autoupdateTimer = null;
+
+    if (update === true || update === TIMERS_DEFAULT || update === 'true') {
+      this.autoupdate = true;
+      this.minutes = TIMERS_DEFAULT_MINUTES;
+    } else if (typeof update === 'number') {
+      this.autoupdate = true;
+      this.minutes = update;
+    } else if (typeof update === 'object') {
+      this.autoupdate = 'autoupdate' in update && typeof update.autoupdate === 'boolean' ? update.autoupdate : false;
+
+      if (this.autoupdate && !('minutes' in update)) throw new TimerError('No minutes specified');
+      else this.minutes = update.minutes;
+    }
+
+    if (this.autoupdate) {
+      if (!isValidTimer(this.minutes)) throw new TimerError(`Invalid minutes specified of ${this.minutes}`);
+      let ms = this.minutes * 60 * 1000;
+      this.autoupdateTimer = setInterval(() => this.update(true), ms);
+    }
+  }
+};
+
+exports.Blacklist = Blacklist;
