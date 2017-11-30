@@ -132,7 +132,7 @@ If for whatever reason you would like to switch tokens, you can do that easily b
 This work is ©Copyright under the `GNU AFFERO GENERAL PUBLIC LICENSE Version 3`. See LICENSE for more details.
 
 ### Further Documentation:
-[https://wzhouwzhou.github.io/discordblacklist/](https://wzhouwzhou.github.io/discordblacklist/)
+[https://discordblacklist.willyz.cf/](https://discordblacklist.willyz.cf/)
 
 Enjoy this package? Consider starring on [github](https://github.com/wzhouwzhou/discordblacklist) and checking out some of my other work:
 

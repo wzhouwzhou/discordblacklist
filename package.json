@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/wzhouwzhou/discordblacklist/issues"
   },
-  "homepage": "https://github.com/wzhouwzhou/discordblacklist#readme",
+  "homepage": "https://discordblacklist.willyz.cf/",
   "github": "https://github.com/wzhouwzhou/discordblacklist",
   "dependencies": {
     "snekfetch": "^3.5.8"
