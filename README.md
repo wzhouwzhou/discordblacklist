@@ -28,19 +28,24 @@ The following contains documentation for discordblacklist 2.0.0, read the 1.0.7 
     // Someone's id to test
     const someID = '1234567890';
 
-    // Check if they are on the banlist - Returns a true/false , or throws an error if an error occurred.
-    let isOnTheBanList = blacklist.lookup(someID);
+    // Check if they are on the banlist - Returns either null or the BannedUser.
+    let user = blacklist.lookup(someID);
 
     // Get the full list in string JSON form. Must be used after update() has completed
-    const jsonified = blacklist.banstore.stringify(true);
+    const jsonified = blacklist.banstore.stringify(-1, true);
     console.log(jsonified);
 
     // If you installed optional dependencies (erlpack) use this.
-    const bufferstring = blacklist.banstore.stringify(false);
+    const bufferstring = blacklist.banstore.stringify(-1, false);
     console.log(bufferstring);
 
     // If you want an Array of BannedUser objects
     const array = blacklist.banstore.array();
+
+    // The first user on the banlist
+    const banneduser = array[0];
+    const sameBanneduser = blacklist.banstore.get('1');
+    console.log(banneduser);
 
 ### Setup and functions.
 
@@ -68,6 +73,9 @@ To get the list quickly without updating unless the internal cache was deleted b
     const list = await blacklist.fetchBanlist();
 
 list and newList will contain a <BanStore> object which is a collection of BannedUser objects mapped by their banID. BannedUser objects have an id (userid), tag (discord tag), banID, bannedFor (reason), prooflink.
+
+Used normally (i.e. caching enabled), BanStores will always be stored inside blacklist.banstore
+
 To strip any class data and just get them in pure object form just run <BannedUser>.serialize() or <BanStore>.serialize(), and to stringify them <BannedUser> or <BanStore>.stringify().
 
 **It is recommended you update your ban list every two hours**

@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "clean-nodem": "rm -rf ./node_modules",
-    "test": "npm run lint",
-    "lint": "eslint lib *.js",
-    "lint-fix": "eslint lib *.js --fix",
+    "test": "npm run lint; npm run generictest",
+    "generictest": "node ./tests/generic/generaltest",
+    "lint": "eslint lib examples *.js",
+    "lint-fix": "eslint lib examples *.js --fix",
     "gen-doc": "jsdoc -r --verbose -d ./docs -c ./conf.json . ./README.md;",
     "clean-doc": "rm -rf ./docs; npm run gen-doc",
     "count-lines": "find ./lib -name '*.js' | xargs wc -l"
