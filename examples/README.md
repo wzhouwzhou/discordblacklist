@@ -11,6 +11,5 @@ Please report any bugs or errors with the examples to `QuantumlyTangled#1280` on
 
 ## __Plain discord.js examples__
 **Required:**
-- [Moment , Install using: npm install --save moment](https://github.com/moment/moment)
 - [discord.js , Install using: npm install --save github:hydrabolt/discord.js#master](https://discord.js.org/#/docs/main/master/general/welcome)
 - [Discordblacklist , Install using: npm install --save discordblacklist](https://github.com/wzhouwzhou/discordblacklist)
