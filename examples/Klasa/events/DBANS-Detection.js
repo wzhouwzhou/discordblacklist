@@ -3,6 +3,10 @@ const { Blacklist } = require('discordblacklist');
 const moment = require('moment');
 const token = 'YOUR bans.discordlist.com TOKEN';
 
+// ============================================================================================ //
+// discordblacklist examples by Zack D. (@QuantumlyTangled/https://github.com/QuantumlyTangled).//
+// ============================================================================================ //
+
 module.exports = class extends Event {
   constructor(...args) {
     super(...args, {
