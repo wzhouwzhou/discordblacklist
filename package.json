@@ -9,7 +9,7 @@
     "generictest": "node ./tests/generic/generaltest",
     "lint": "eslint lib examples *.js",
     "lint-fix": "eslint lib examples *.js --fix",
-    "gen-doc": "jsdoc -r --verbose -d ./docs -c ./conf.json . ./README.md;",
+    "gen-doc": "jsdoc -r --verbose -d ./docs -c ./conf.json -R ./README.md .;",
     "clean-doc": "rm -rf ./docs; npm run gen-doc",
     "count-lines": "find ./lib -name '*.js' | xargs wc -l"
   },
@@ -27,8 +27,9 @@
   "bugs": {
     "url": "https://github.com/wzhouwzhou/discordblacklist/issues"
   },
-  "homepage": "https://discordblacklist.willyz.cf/",
+  "homepage": "https://github.com/wzhouwzhou/discordblacklist",
   "github": "https://github.com/wzhouwzhou/discordblacklist",
+  "docs": "https://discordblacklist.willyz.cf/",
   "dependencies": {
     "snekfetch": "^3.5.8"
   },

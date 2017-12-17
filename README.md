@@ -128,6 +128,7 @@ To clear the autoupdater simply call ``banlist.stopUpdateTimer();``. To then set
 If for whatever reason you would like to switch tokens, you can do that easily by calling.
 ```banlist.changeToken('newtoken');```
 
+### Official examples for various frameworks and libraries are stored in the [examples](https://github.com/wzhouwzhou/discordblacklist/tree/master/examples) folder, visit the link to read more about them.
 
 This work is ©Copyright under the `GNU AFFERO GENERAL PUBLIC LICENSE Version 3`. See LICENSE for more details.
 
