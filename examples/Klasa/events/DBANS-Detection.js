@@ -7,6 +7,8 @@ const token = 'YOUR bans.discordlist.com TOKEN';
 // discordblacklist examples by Zack D. (@QuantumlyTangled/https://github.com/QuantumlyTangled).//
 // ============================================================================================ //
 
+const thumbnailIcon = 'https://i.imgur.com/4GXrdYY.png';
+
 module.exports = class extends Event {
   constructor(...args) {
     super(...args, {
@@ -27,8 +29,9 @@ module.exports = class extends Event {
       .addField(`Proof:`, `${isOnTheBanList.proofLink}`, true)
       .addField(`Reason:`, `${isOnTheBanList.bannedFor}`)
       .setColor(1)
-      .setThumbnail('https://cdn.discordapp.com/icons/269262004852621312/4947742034342a5348f6117e3e1e94bd.webp?size=1024')
-      .setFooter(`${this.client.user.username} | ${moment().format('MMMM Do YYYY, h:mm:ss a')}`, this.client.user.displayAvatarURL);
+      .setThumbnail(thumbnailIcon)
+      .setFooter(`${this.client.user.username} | ${moment().format('MMMM Do YYYY, h:mm:ss a')}`,
+        this.client.user.displayAvatarURL);
     const channel = member.guild.channels.get(member.guild.configs.welcome);
     if (!channel) member.guild.owner.send('There is no welcome channel detected, did it get deleted?');
     return channel.send({ embed });
