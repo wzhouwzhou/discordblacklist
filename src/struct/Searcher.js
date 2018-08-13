@@ -1,7 +1,7 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const http = require('https');
+const https = require('https');
 
 const default_options = {
   hostname: 'bans.discord.id',
