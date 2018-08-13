@@ -17,37 +17,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 /**
  * The Blacklist Class - The main hub for interacting with the DiscordBans API.
  *
- * @export Blacklist
- * @type {Blacklist}
+ * @export
+ * @type {Searcher}
  */
 
-exports.Blacklist = require('./lib/classes/Blacklist.discord').Blacklist;
-
-/**
- * An Object containing the three custom errors in case you would like to check for them.
- * See {@link module-ErrorEnum ErrorEnum} for more information.
- *
- * @export Errors
- * @type {Object}
- */
-
-exports.Errors = require('./lib/deps/ErrorEnum');
-
-/**
- * The BanStore Class - In case you would like to create BanStores yourself.
- * See {@link BanStore} for more information.
- *
- * @export BanStore
- * @type {BanStore}
- */
-
-exports.BanStore = require('./lib/classes/BanStore').BanStore;
-
-/**
- * Various Package Constants. See {@link module-Constants Constants}
- *
- * @export Constants
- * @type {Object}
- */
-
-exports.Constants = require('./lib/deps/Constants');
+module.exports = require('./src/struct/Searcher').default;
