@@ -24,7 +24,7 @@ const Searcher = class Searcher {
 
   lookup(id) {
     if (!/^\d+$/.test(id)) Promise.reject(new Error('Discord User Snowflake ID must contain only numbers.'));
-    const options = option_store.get(this);
+    const options = Object.assign({}, option_store.get(this));
     options.path += `?user_id=${id}`;
     return new Promise((res, rej) => {
       const req = https.get(options, (response) => {
@@ -43,7 +43,7 @@ const Searcher = class Searcher {
 
   async isBanned(id) {
     if (!/^\d+$/.test(id)) throw new Error('Discord User Snowflake ID must contain only numbers.');
-    return !!(await this.lookup(id)).banned;
+    return !!+(await this.lookup(id)).banned;
   }
 };
 Searcher.Searcher = Searcher.default = Searcher;
