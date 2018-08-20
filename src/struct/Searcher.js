@@ -27,7 +27,7 @@ const Searcher = class Searcher {
     const options = Object.assign({}, option_store.get(this));
     options.path += `?user_id=${id}`;
     return new Promise((res, rej) => {
-      const req = https.get(options, (response) => {
+      const req = https.get(options, response => {
         const { statusCode } = response;
         if (statusCode !== 200) {
           rej(new Error(`Request Failed.\nStatus Code: ${statusCode}`));
@@ -35,9 +35,9 @@ const Searcher = class Searcher {
         }
         let chunks = [];
         response.on('data', chunk => chunks.push(chunk));
-        response.on('end', () => res(JSON.parse(Buffer.concat(chunks).toString())));
+        return response.on('end', () => res(JSON.parse(Buffer.concat(chunks).toString())[0]));
       });
-      req.end();
+      return req.end();
     });
   }
 

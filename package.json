@@ -1,6 +1,6 @@
 {
   "name": "discordblacklist",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "The Featured Nodejs package that facilitates getting banned Discord users from DiscordBans",
   "main": "index.js",
   "scripts": {
