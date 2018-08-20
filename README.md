@@ -17,9 +17,9 @@
 
 ### Installing via NPM.
 
-```$ npm install --save discordblacklist```
+```$ npm install --save discordblacklist@3.0.3```
 
-**Note: Version 3.x API has changed from previous versions, all previous versions are deprecated following a rewrite of the discordbans api as well as changed domains and removed features.**
+**Note: Version 3.0.3 package API has changed from previous versions, all previous versions are deprecated following a rewrite of the discordbans api as well as changed domains and removed features.**
 
 ### Quickstart:
 
@@ -51,6 +51,11 @@ If for whatever reason you would like to switch tokens, you can do that easily b
 This work is ©Copyright under the `GNU AFFERO GENERAL PUBLIC LICENSE Version 3`. See LICENSE for more details.
 
 Enjoy this package? Consider starring on [github](https://github.com/wzhouwzhou/discordblacklist) and checking out some of my other work:
+
 [Youtube Search API](https://npmjs.com/ytsearcher)
+
+[Fluent Filepaths](https://npmjs.com/easypathutil)
+
+[Urban Dictionary](https://npmjs.com/easyurban)
 
 Contact William Zhou#0001 via https://discord.gg/jj5FzF7 for more information.

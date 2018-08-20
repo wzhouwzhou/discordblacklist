@@ -68,12 +68,12 @@ const Searcher = class Searcher {
         response.on('data', chunk => chunks.push(chunk));
         return response.on('end', () => res(JSON.parse(Buffer.concat(chunks).toString())));
       });
-      req.end();
+      return req.end();
     });
   }
 
   async isBanned(id) {
-    if (regex.test(id)) throw new Error('Discord User Snowflake ID must contain only numbers.');
+    if (!regex.test(id)) throw new Error('Discord User Snowflake ID must contain only numbers.');
     return !!(await this.lookup(id)).banned;
   }
 };
