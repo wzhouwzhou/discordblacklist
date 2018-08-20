@@ -24,7 +24,7 @@ const Searcher = class Searcher {
 
   lookup(id) {
     if (!/^\d+$/.test(id)) Promise.reject(new Error('Discord User Snowflake ID must contain only numbers.'));
-    const options = option_store.get(this);
+    const options = Object.assign({}, option_store.get(this));
     options.path += `?user_id=${id}`;
     return new Promise((res, rej) => {
       const req = https.get(options, response => {
@@ -45,11 +45,7 @@ const Searcher = class Searcher {
     if (!ids[0] || ids.length < 2) Promise.reject(new Error('You must define an array with 2 or more ID\'s defined.'));
     let validIDs = [];
     for (let id of ids) {
-      if (!/^\d+$/.test(id)) {
-        console.log(`ID ${id} was not a Discord Snowflake, skipping...`);
-        continue;
-      }
-      else {
+      if (/^\d+$/.test(id)) {
         validIDs.push(id);
       }
     }
@@ -73,13 +69,13 @@ const Searcher = class Searcher {
         response.on('data', chunk => chunks.push(chunk));
         return response.on('end', () => res(JSON.parse(Buffer.concat(chunks).toString())));
       });
-      req.end();
+      return req.end();
     });
   }
 
   async isBanned(id) {
     if (!/^\d+$/.test(id)) throw new Error('Discord User Snowflake ID must contain only numbers.');
-    return !!(await this.lookup(id)).banned;
+    return !!+(await this.lookup(id)).banned;
   }
 };
 Searcher.Searcher = Searcher.default = Searcher;
