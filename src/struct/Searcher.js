@@ -40,7 +40,6 @@ const Searcher = class Searcher {
       req.end();
     });
   }
-<<<<<<< HEAD
   
   bulkLookup(ids) {
     if (!ids[0] || ids.length < 2) Promise.reject(new Error('You must define an array with 2 or more ID\'s defined.'));
@@ -75,8 +74,6 @@ const Searcher = class Searcher {
       });
     }
   }
-=======
->>>>>>> 4ac4f031d6a77c96518b20377632d89c86a1cd6b
 
   async isBanned(id) {
     if (!/^\d+$/.test(id)) throw new Error('Discord User Snowflake ID must contain only numbers.');
