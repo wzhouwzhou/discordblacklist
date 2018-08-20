@@ -26,5 +26,8 @@
   },
   "homepage": "https://github.com/wzhouwzhou/discordblacklist",
   "github": "https://github.com/wzhouwzhou/discordblacklist",
-  "docs": "https://discordblacklist.willyz.cf/"
+  "docs": "https://discordblacklist.willyz.cf/",
+  "devDependencies": {
+    "eslint": "^5.4.0"
+  }
 }
