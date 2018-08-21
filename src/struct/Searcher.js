@@ -74,7 +74,7 @@ const Searcher = class Searcher {
 
   async isBanned(id) {
     if (!regex.test(id)) throw new Error('Discord User Snowflake ID must contain only numbers.');
-    return !!(await this.lookup(id)).banned;
+    return !!+(await this.lookup(id)).banned;
   }
 };
 Searcher.Searcher = Searcher.default = Searcher;
