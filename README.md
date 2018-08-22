@@ -18,9 +18,11 @@
 
 ### Installing via NPM.
 
-```$ npm install --save discordblacklist@3.1.1 --only=production```
+```$ npm install --save discordblacklist@3.2.0 --only=production```
 
-**Note: Version 3.1.x package API has changed from previous versions, all previous versions are deprecated following a rewrite of the discordbans api as well as changed domains and removed features.**
+**Note: Version 3.2.x package API has changed from previous versions, all previous versions below 3.x are deprecated following a rewrite of the discordbans api as well as changed domains and removed features.**
+
+Version 3.2.x now allows you to bulk lookup **more than 99 users at once**.
 
 **Why discordblacklist?**
 
@@ -52,11 +54,14 @@
     // No await:
     blacklist.isBanned(someID).then(result => console.log(result));
 
-    // Bulk lookup several users
+    // Bulk lookup several users (no maximum user count to lookup at once!)
     const ids = ['12345', '123456', '1234567'];
     data = await blacklist.bulkLookup(ids);
     // No await:
     blacklist.bulkLookup(ids).then(result => console.log(result));
+
+    // Bulk lookup, but get the results mapped by user_id
+    const mapdata = await bulkLookupMap(ids);
 
 **Changing token**
 
