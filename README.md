@@ -17,7 +17,7 @@
 
 ### Installing via NPM.
 
-```$ npm install --save discordblacklist@3.0.3```
+```$ npm install --save discordblacklist@3.0.3 --only=production```
 
 **Note: Version 3.0.3 package API has changed from previous versions, all previous versions are deprecated following a rewrite of the discordbans api as well as changed domains and removed features.**
 
@@ -42,6 +42,12 @@
     console.log(onTheList);
     // No await:
     blacklist.isBanned(someID).then(result => console.log(result));
+
+    // Bulk lookup several users
+    const ids = ['12345', '123456', '1234567'];
+    data = await blacklist.bulkLookup(ids);
+    // No await:
+    blacklist.bulkLookup(ids).then(result => console.log(result));
 
 **Changing token**
 

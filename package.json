@@ -7,6 +7,7 @@
     "clean-nodem": "rm -rf ./node_modules",
     "lint": "eslint src *.js",
     "lint-fix": "eslint src *.js --fix",
+    "test": "npm run lint",
     "clean-doc": "rm -rf ./docs; npm run gen-doc",
     "count-lines": "find ./src -name '*.js' | xargs wc -l"
   },
