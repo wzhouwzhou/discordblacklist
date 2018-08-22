@@ -43,15 +43,26 @@ const Searcher = class Searcher {
     });
   }
 
-  bulkLookup(ids) {
+  async bulkLookup(ids) {
+    if (!Array.isArray(ids)) throw new Error("ID's to bulk lookup must be provided in an array.");
+    if (ids.length < 1) throw new Error("You must provide 1 or more valid ID's to bulk lookup.");
+
+    if (ids.length < 99) return this._bulkLookup(ids);
+    return [].concat(...await Promise.all(
+      [...new Array(Math.ceil(ids.length / 98))].map((_, n) => this._bulkLookup(ids.slice(98 * n, 98 * (n + 1))))
+    ));
+  }
+
+  _bulkLookup(ids) {
     if (!Array.isArray(ids)) return Promise.reject(new Error("ID's to bulk lookup must be provided in an array."));
     const validIDs = ids.filter(id => regex.test(id));
     if (validIDs.length < 1) {
-      return Promise.reject(new Error('You must provide 1 or more valid ID\'s to bulk lookup.'));
+      return Promise.reject(new Error("You must provide 1 or more valid ID's to bulk lookup."));
     }
     if (validIDs.length > 99) {
-      return Promise.reject(new Error(`More than 99 ID's for bulk lookup is not allowed!`));
+      return Promise.reject(new Error(`More than 99 ID's for direct bulk lookup request is not allowed!`));
     }
+
     const options = Object.assign({}, option_store.get(this));
     options.path += [`?user_id=${validIDs[0]}`, ...validIDs.map(e => `user_id=${e}`)].join('&');
     return new Promise((res, rej) => {
