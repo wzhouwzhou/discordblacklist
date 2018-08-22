@@ -1,12 +1,13 @@
 {
   "name": "discordblacklist",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "description": "The Featured Nodejs package that facilitates getting banned Discord users from DiscordBans",
   "main": "index.js",
   "scripts": {
     "clean-nodem": "rm -rf ./node_modules",
     "lint": "eslint src *.js",
     "lint-fix": "eslint src *.js --fix",
+    "test": "npm run lint",
     "clean-doc": "rm -rf ./docs; npm run gen-doc",
     "count-lines": "find ./src -name '*.js' | xargs wc -l"
   },
