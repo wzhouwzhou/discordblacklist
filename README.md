@@ -17,9 +17,9 @@
 
 ### Installing via NPM.
 
-```$ npm install --save discordblacklist@3.0.3 --only=production```
+```$ npm install --save discordblacklist@3.1.0 --only=production```
 
-**Note: Version 3.0.3 package API has changed from previous versions, all previous versions are deprecated following a rewrite of the discordbans api as well as changed domains and removed features.**
+**Note: Version 3.1.0 package API has changed from previous versions, all previous versions are deprecated following a rewrite of the discordbans api as well as changed domains and removed features.**
 
 ### Quickstart:
 
